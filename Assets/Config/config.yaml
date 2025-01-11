@@ -1,0 +1,38 @@
+behaviors:
+  PlayerAgent:
+    trainer_type: ppo
+    hyperparameters:  # 训练算法的超参数
+      batch_size: 4096
+      buffer_size: 20480
+      learning_rate: 0.0003
+      beta: 0.2
+      epsilon: 0.3
+      lambd: 0.99
+      num_epoch: 5
+      learning_rate_schedule: linear
+    network_settings:  # 神经网络设置
+      normalize: true
+      hidden_units: 1024
+      num_layers: 5
+    reward_signals:  # 奖励信号设置
+      extrinsic:
+        gamma: 0.99
+        strength: 1.0
+      curiosity:  # 内在奖励信号
+        gamma: 0.99
+        strength: 0.3
+      gail: # GAIL生成对抗算法
+        gamma: 0.99
+        strength: 0.4
+        demo_path: "Demos/AgentDemo-01.demo" # demo文件路径
+    behavioral_cloning:
+      demo_path: "Demos/AgentDemo-01.demo"  # demo文件路径
+      strength: 0.5
+    max_steps: 20000000  # 训练最大步数
+    time_horizon: 1024
+    summary_freq: 1000
+    self_play:  # 自我对抗
+      save_steps: 2000
+      team_change: 0.7
+      swap_steps: 1000
+      window: 2000

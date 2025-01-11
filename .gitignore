@@ -1,0 +1,8 @@
+.vscode/
+Library/
+Logs/
+Temp/
+Assets/results/
+*.sln
+*.csproj
+*.DS_Store
